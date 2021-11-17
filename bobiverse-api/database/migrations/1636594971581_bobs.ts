@@ -8,7 +8,7 @@ export default class Bobs extends BaseSchema {
       table.increments('id')
 
       table.string('name', 255).notNullable()
-      table.integer('user_id').references('id').inTable('users')
+      table.integer('user_id').references('id').inTable('users').onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { belongsTo, BelongsTo, BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { hasOne, HasOne, belongsTo, BelongsTo, BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import Bob from './Bob'
+import Mineral from './Mineral'
 
 export default class Drone extends BaseModel {
   @column({ isPrimary: true })
@@ -18,6 +19,15 @@ export default class Drone extends BaseModel {
   @column()
   public bobId: number
 
+  @column()
+  public targetId: number | null
+
+  @column()
+  public jobCompleteAt: DateTime | null
+
   @belongsTo(() => Bob)
   public bob: BelongsTo<typeof Bob>
+
+  @hasOne(() => Mineral)
+  public mineral: HasOne<typeof Mineral>
 }

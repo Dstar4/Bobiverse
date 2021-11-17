@@ -6,8 +6,9 @@ export default class Drones extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('bob_id').references('id').inTable('bobs')
+      table.integer('bob_id').references('id').inTable('bobs').onDelete('CASCADE')
       table.string('size', 255)
+      table.dateTime('job_complete_at')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

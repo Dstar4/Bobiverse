@@ -18,7 +18,6 @@
 |
 */
 
-import { Router } from '@adonisjs/http-server/build/standalone'
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.post('/auth/login', 'AuthController.login')
@@ -26,7 +25,12 @@ Route.post('/users/register', 'UsersController.store')
 
 Route.group(() => {
   Route.resource('bobs', 'BobsController').apiOnly()
-}).middleware('auth')
+  Route.get('bobs/:id/scan', 'BobsController.scan').middleware('throttle:1,30000')
+  Route.resource('drones', 'DronesController').apiOnly()
+  Route.post('drones/mine', 'DronesController.mine')
+})
+  .middleware('auth')
+  .middleware('updateAction')
 
 Route.get('/', async () => {
   return { hello: 'world' }
