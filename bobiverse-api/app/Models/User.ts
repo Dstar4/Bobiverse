@@ -1,10 +1,16 @@
-import { DateTime } from 'luxon'
+import {DateTime} from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  column,
+  beforeSave,
+  BaseModel,
+  hasMany,
+  HasMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import Bob from './Bob'
 
 export default class User extends BaseModel {
-  @column({ isPrimary: true })
+  @column({isPrimary: true})
   public id: number
 
   @column()
@@ -13,16 +19,16 @@ export default class User extends BaseModel {
   @column()
   public nickname: string
 
-  @column({ serializeAs: null })
+  @column({serializeAs: null})
   public password: string
 
   @column()
   public rememberMeToken?: string
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({autoCreate: true})
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({autoCreate: true, autoUpdate: true})
   public updatedAt: DateTime
 
   @hasMany(() => Bob)

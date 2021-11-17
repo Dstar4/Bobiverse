@@ -1,15 +1,11 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-// import Bob from 'App/Models/Bob'
 import User from 'App/Models/User'
 import Mineral from 'App/Models/Mineral'
 import Location from 'App/Models/Location'
-
+import {generateRandom} from 'lib/generateRandom'
 const client = Database.connection()
 
-function generateRandom(min = -10, max = 10) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
 export default class InitializeSeeder extends BaseSeeder {
   public async run() {
     await client.truncate('users', true)
@@ -31,7 +27,7 @@ export default class InitializeSeeder extends BaseSeeder {
     ])
 
     let l = await Promise.all(
-      locations.map(async (location) => {
+      locations.map(async location => {
         let promises: Mineral[] = []
         for (let i = 0; i < 10; i++) {
           let loc = await Mineral.create({
@@ -60,12 +56,14 @@ export default class InitializeSeeder extends BaseSeeder {
       name: 'Bob',
       locationId: locations[0].id,
       coordinates: {
-        x: 2,
-        y: -4,
-        z: -8,
+        x: generateRandom(),
+        y: generateRandom(),
+        z: generateRandom(),
       },
     })
 
-    const drones = await bob.related('drones').createMany([{ size: 'md' }, { size: 'md' }])
+    const drones = await bob
+      .related('drones')
+      .createMany([{size: 'md'}, {size: 'md'}])
   }
 }

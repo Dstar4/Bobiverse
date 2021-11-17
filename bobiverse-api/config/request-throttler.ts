@@ -1,4 +1,4 @@
-import { ThrottleConfig } from '@ioc:Adonis/Addons/RequestThrottler'
+import {ThrottleConfig} from '@ioc:Adonis/Addons/RequestThrottler'
 
 export default {
   maxAttempts: 10,

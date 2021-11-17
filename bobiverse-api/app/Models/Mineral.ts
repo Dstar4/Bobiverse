@@ -1,7 +1,13 @@
-import { DateTime } from 'luxon'
-import { beforeDelete, BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import {DateTime} from 'luxon'
+import {
+  beforeDelete,
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+} from '@ioc:Adonis/Lucid/Orm'
 import Drone from './Drone'
-import { Coordinates } from '../../types/global'
+import {Coordinates} from '../../types/global'
 
 export default class Mineral extends BaseModel {
   @beforeDelete()
@@ -11,7 +17,7 @@ export default class Mineral extends BaseModel {
     })
   }
 
-  @column({ isPrimary: true })
+  @column({isPrimary: true})
   public id: number
 
   @column()
@@ -23,10 +29,10 @@ export default class Mineral extends BaseModel {
   @column()
   public coordinates: Coordinates
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({autoCreate: true})
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({autoCreate: true, autoUpdate: true})
   public updatedAt: DateTime
 
   @belongsTo(() => Drone)

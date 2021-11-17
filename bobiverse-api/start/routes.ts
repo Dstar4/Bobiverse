@@ -25,13 +25,14 @@ Route.post('/users/register', 'UsersController.store')
 
 Route.group(() => {
   Route.resource('bobs', 'BobsController').apiOnly()
-  Route.get('bobs/:id/scan', 'BobsController.scan').middleware('throttle:1,30000')
+  Route.get('bobs/:id/scan', 'BobsController.scan').middleware(
+    'throttle:1,30000'
+  )
   Route.resource('drones', 'DronesController').apiOnly()
   Route.post('drones/mine', 'DronesController.mine')
-})
-  .middleware('auth')
-  .middleware('updateAction')
+}).middleware('auth')
+// .middleware('updateAction')
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return {hello: 'world'}
 })
