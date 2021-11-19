@@ -34,6 +34,7 @@
     "@adonisjs/repl": "^3.1.7",
     "adonis-request-throttler": "^2.0.3",
     "date-fns": "^2.25.0",
+    "lodash.isequal": "^4.5.0",
     "luxon": "^2.1.1",
     "pg": "^8.7.1",
     "phc-argon2": "^1.1.2",

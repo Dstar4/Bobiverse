@@ -24,7 +24,8 @@ Route.post('/auth/login', 'AuthController.login')
 Route.post('/users/register', 'UsersController.store')
 
 Route.group(() => {
-  Route.resource('bobs', 'BobsController').apiOnly()
+  Route.resource('bobs', 'BobsController').apiOnly().except(['update'])
+
   Route.get('bobs/:id/scan', 'BobsController.scan').middleware(
     'throttle:1,30000'
   )

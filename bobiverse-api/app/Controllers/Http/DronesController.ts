@@ -4,6 +4,8 @@ import Drone from 'App/Models/Drone'
 import {DateTime} from 'luxon'
 import {add} from 'date-fns'
 import Mineral from 'App/Models/Mineral'
+import isEqual from 'lodash.isequal'
+
 
 export default class DronesController {
   public async index({user}: HttpContextContract) {
@@ -43,8 +45,10 @@ export default class DronesController {
     const drone = await Drone.findOrFail(droneId)
     const bob = await Bob.findOrFail(drone.bobId)
     const target = await Mineral.findOrFail(targetId)
-
-    if (bob.locationId !== target.locationId) {
+    if (
+      bob.locationId !== target.locationId ||
+      isEqual(bob.coordinates !== target.coordinates)
+    ) {
       response.badRequest({message: 'Unable to mine a location thar far away'})
     }
     drone.targetId = target.id
