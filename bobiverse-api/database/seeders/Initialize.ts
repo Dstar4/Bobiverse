@@ -6,6 +6,8 @@ import Location from 'App/Models/Location'
 import {generateRandom} from 'lib/generateRandom'
 const client = Database.connection()
 
+
+
 export default class InitializeSeeder extends BaseSeeder {
   public async run() {
     await client.truncate('users', true)
@@ -26,7 +28,7 @@ export default class InitializeSeeder extends BaseSeeder {
       },
     ])
 
-    let l = await Promise.all(
+    await Promise.all(
       locations.map(async location => {
         let promises: Mineral[] = []
         for (let i = 0; i < 10; i++) {
@@ -62,8 +64,6 @@ export default class InitializeSeeder extends BaseSeeder {
       },
     })
 
-    const drones = await bob
-      .related('drones')
-      .createMany([{size: 'md'}, {size: 'md'}])
+    await bob.related('drones').createMany([{size: 'md'}, {size: 'md'}])
   }
 }

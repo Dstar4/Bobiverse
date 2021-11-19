@@ -7,16 +7,16 @@ import {
   scope,
   hasMany,
   HasMany,
-  HasOne,
   ModelQueryBuilderContract,
   beforeFetch,
   beforeFind,
-  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
-import User from './user'
+
+import User from './User'
 import Drone from './Drone'
 import {Coordinates} from '../../types/global'
 import Location from './Location'
+
 export default class Bob extends BaseModel {
   /* -------------------------------------------------------------------------- */
   /*                                   Schema                                   */
