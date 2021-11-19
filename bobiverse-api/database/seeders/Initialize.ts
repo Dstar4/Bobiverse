@@ -3,10 +3,8 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import User from 'App/Models/User'
 import Mineral from 'App/Models/Mineral'
 import Location from 'App/Models/Location'
-import {generateRandom} from 'lib/generateRandom'
+import {generateRandom} from '../../lib/generateRandom'
 const client = Database.connection()
-
-
 
 export default class InitializeSeeder extends BaseSeeder {
   public async run() {

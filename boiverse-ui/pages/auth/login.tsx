@@ -4,9 +4,9 @@ import { Row, Col, Form, Input, Button, Checkbox } from 'antd'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
-
 import PageLayout from '../../components/Layout'
 
+const baseUrl = process.env.BACKEND_URL
 
 export default function Login() {
   const [cookies, setCookie, removeCookie] = useCookies(['bobiverse-token'])
@@ -16,7 +16,7 @@ export default function Login() {
     console.log('Received values of form: ', values)
 
     const response = await axios.request({
-      url: 'http://localhost:3333/auth/login',
+      url: `${baseUrl}/auth/login`,
       method: 'POST',
       data: { email: values.email, password: values.password }
     })

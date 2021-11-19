@@ -26,6 +26,7 @@ const tailFormItemLayout = {
     }
   }
 }
+const baseUrl = process.env.BACKEND_URL
 
 export default function Register() {
   const [form] = Form.useForm()
@@ -35,7 +36,7 @@ export default function Register() {
   const onFinish = async (values: any) => {
     console.log('Received values of form: ', values)
     const response = await axios.request({
-      url: 'http://localhost:3333/users/register',
+      url: `${baseUrl}/user/register`,
       method: 'POST',
       data: { email: values.email, password: values.password, nickname: values.nickname }
     })
