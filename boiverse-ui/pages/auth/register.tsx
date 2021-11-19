@@ -36,7 +36,7 @@ export default function Register() {
   const onFinish = async (values: any) => {
     console.log('Received values of form: ', values)
     const response = await axios.request({
-      url: `${baseUrl}/user/register`,
+      url: `${baseUrl}/users/register`,
       method: 'POST',
       data: { email: values.email, password: values.password, nickname: values.nickname }
     })
