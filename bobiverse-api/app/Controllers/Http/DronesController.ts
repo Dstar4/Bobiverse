@@ -6,7 +6,6 @@ import {add} from 'date-fns'
 import Mineral from 'App/Models/Mineral'
 import isEqual from 'lodash.isequal'
 
-
 export default class DronesController {
   public async index({user}: HttpContextContract) {
     const drones = await user
