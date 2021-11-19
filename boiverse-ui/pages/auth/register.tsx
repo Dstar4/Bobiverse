@@ -26,7 +26,7 @@ const tailFormItemLayout = {
     }
   }
 }
-const baseUrl = process.env.BACKEND_URL
+const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export default function Register() {
   const [form] = Form.useForm()

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 import PageLayout from '../../components/Layout'
 
-const baseUrl = process.env.BACKEND_URL
+const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export default function Login() {
   const [cookies, setCookie, removeCookie] = useCookies(['bobiverse-token'])
