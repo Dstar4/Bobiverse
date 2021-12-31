@@ -27,7 +27,7 @@ export default class BobsController {
     return {data: bob}
   }
 
-  public async drones({user, request, response}: HttpContextContract) {
+  public async drones({request}: HttpContextContract) {
     // const bob = await user
     //   .related('bobs')
     //   .query()

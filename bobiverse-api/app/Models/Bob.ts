@@ -8,8 +8,6 @@ import {
   hasMany,
   HasMany,
   ModelQueryBuilderContract,
-  beforeFetch,
-  beforeFind,
 } from '@ioc:Adonis/Lucid/Orm'
 
 import User from './User'

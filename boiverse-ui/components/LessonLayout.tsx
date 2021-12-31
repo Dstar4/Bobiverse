@@ -15,10 +15,12 @@ export default function LessonLayout({
 
   return (
     <PageLayout>
-      <Col span={8}>
-        <Dashboard />
-      </Col>
-      <Col span={16}>{children}</Col>
+      <div>
+        <Col span={8}>
+          <Dashboard />
+        </Col>
+        <Col span={16}>{children}</Col>
+      </div>
     </PageLayout>
   )
 }

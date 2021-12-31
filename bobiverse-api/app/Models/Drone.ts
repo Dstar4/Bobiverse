@@ -51,7 +51,7 @@ export default class Drone extends BaseModel {
   public mineral: HasOne<typeof Mineral>
 
   /* ----------------------------- Custom Methods ----------------------------- */
-  public isCurrentlyWorking = this.jobCompleteAt ? true : false
+  public isCurrentlyWorking = () => (this.jobCompleteAt ? true : false)
 
   public isViableTarget(target: Mineral) {
     return (

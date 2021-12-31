@@ -47,7 +47,7 @@ export default class DronesController {
     const target = await Mineral.findOrFail(targetId)
 
     // Check if drone is already mining
-    if (drone.isCurrentlyWorking) {
+    if (drone.isCurrentlyWorking()) {
       return response.badRequest({
         message: 'Complete current job before starting another one',
       })

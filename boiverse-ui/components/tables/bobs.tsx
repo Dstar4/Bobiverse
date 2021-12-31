@@ -66,8 +66,7 @@ export function BobsTable({
         rowSelection={{
           type: 'radio',
           // selectedRowKeys: ['id'],
-          onChange: (selectedRowKeys: Key[], selectedRows: Bob[]) => {
-            console.log('SELECT', selectedRowKeys, selectedRows)
+          onChange: (selectedRowKeys: any) => {
             setSelectedBob(selectedRowKeys[0])
           },
         }}
