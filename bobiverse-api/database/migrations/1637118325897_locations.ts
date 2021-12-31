@@ -22,6 +22,15 @@ export default class Locations extends BaseSchema {
         .onDelete('CASCADE')
       table.jsonb('coordinates')
     })
+    this.schema.alterTable('drones', table => {
+      table
+        .integer('location_id')
+        .references('id')
+        .inTable('locations')
+        .onDelete('CASCADE')
+      table.jsonb('coordinates')
+      table.boolean('deployed').defaultTo(false)
+    })
 
     this.schema.alterTable('minerals', table => {
       table
@@ -37,6 +46,11 @@ export default class Locations extends BaseSchema {
     this.schema.alterTable('bobs', table => {
       table.dropColumn('location_id')
       table.dropColumn('coordinates')
+    })
+    this.schema.alterTable('drones', table => {
+      table.dropColumn('location_id')
+      table.dropColumn('coordinates')
+      table.dropColumn('deployed')
     })
     this.schema.alterTable('minerals', table => {
       table.dropColumn('location_id')

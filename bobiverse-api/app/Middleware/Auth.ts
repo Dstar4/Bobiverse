@@ -2,6 +2,7 @@ import {GuardsList} from '@ioc:Adonis/Addons/Auth'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 import {AuthenticationException} from '@adonisjs/auth/build/standalone'
 import User from 'App/Models/User'
+
 /**
  * Auth middleware is meant to restrict un-authenticated access to a given route
  * or a group of routes.

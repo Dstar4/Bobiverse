@@ -14,8 +14,9 @@ import {
 
 import User from './User'
 import Drone from './Drone'
-import {Coordinates} from '../../types/global'
 import Location from './Location'
+import {Coordinates} from '../../types/global'
+import {viableRange} from '../../lib/movement'
 
 export default class Bob extends BaseModel {
   /* -------------------------------------------------------------------------- */
@@ -60,19 +61,19 @@ export default class Bob extends BaseModel {
   /* -------------------------------------------------------------------------- */
   /*                                  Lifecycle                                 */
   /* -------------------------------------------------------------------------- */
-  @beforeFind()
-  public static joinSingleConnected(
-    query: ModelQueryBuilderContract<typeof Bob>
-  ) {
-    query.withScopes(scopes => scopes.joinRelated())
-  }
+  // @beforeFind()
+  // public static joinSingleConnected(
+  //   query: ModelQueryBuilderContract<typeof Bob>
+  // ) {
+  // query.withScopes(scopes => scopes.joinRelated())
+  // }
 
-  @beforeFetch()
-  public static joinManyConnected(
-    query: ModelQueryBuilderContract<typeof Bob>
-  ) {
-    query.withScopes(scopes => scopes.joinRelated())
-  }
+  // @beforeFetch()
+  // public static joinManyConnected(
+  //   query: ModelQueryBuilderContract<typeof Bob>
+  // ) {
+  //   query.withScopes(scopes => scopes.joinRelated())
+  // }
 
   /* -------------------------------------------------------------------------- */
   /*                                   Scopes                                   */
@@ -87,6 +88,21 @@ export default class Bob extends BaseModel {
   /*                                   Methods                                  */
   /* -------------------------------------------------------------------------- */
   public static async loadRelated(user: User) {
-    return await this.query().where({user_id: user.id})
+    return await this.query()
+      .where({user_id: user.id})
+      .preload('location')
+      .preload('drones')
+  }
+
+  public isViableDestination(destination: Coordinates): boolean {
+    if (!this.coordinates) return false
+    if (
+      viableRange(this.coordinates.x).includes(destination.x) &&
+      viableRange(this.coordinates.y).includes(destination.y) &&
+      viableRange(this.coordinates.z).includes(destination.z)
+    ) {
+      return true
+    }
+    return false
   }
 }

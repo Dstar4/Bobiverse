@@ -170,6 +170,9 @@ export const logger: LoggerConfig = {
   |
   */
   level: Env.get('LOG_LEVEL', 'info'),
+  redact: {
+    paths: ['password', '*.password'],
+  },
 
   /*
   |--------------------------------------------------------------------------

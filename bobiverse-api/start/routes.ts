@@ -24,16 +24,47 @@ Route.post('/auth/login', 'AuthController.login')
 Route.post('/users/register', 'UsersController.store')
 
 Route.group(() => {
-  Route.resource('bobs', 'BobsController').apiOnly().except(['update'])
+  /* -------------------------------------------------------------------------- */
+  /*                                   Public                                   */
+  /* -------------------------------------------------------------------------- */
 
-  Route.get('bobs/:id/scan', 'BobsController.scan').middleware(
-    'throttle:1,30000'
-  )
+  Route.get('/', async () => {
+    return {hello: 'world'}
+  })
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    Users                                   */
+  /* -------------------------------------------------------------------------- */
+
+  /* ---------------------------------- Bobs ---------------------------------- */
+  Route.resource('bobs', 'BobsController').apiOnly() //.except(['update'])
+  Route.get('bobs/:id/scan', 'BobsController.scan')
+  // .middleware(
+  //   'throttle:1,30000'
+  // )
+  Route.post('bobs/:id/travel', 'BobsController.travel')
+  // .middleware(
+  //   'throttle:1,30000'
+  // )
+  Route.get('bobs/:id/drones', 'BobsController.drones')
+
+  /* --------------------------------- Drones --------------------------------- */
   Route.resource('drones', 'DronesController').apiOnly()
   Route.post('drones/mine', 'DronesController.mine')
-}).middleware('auth')
-// .middleware('updateAction')
-
-Route.get('/', async () => {
-  return {hello: 'world'}
+  Route.post('drones/:id/travel', 'DronesController.travel')
+  // .middleware(
+  //   'throttle:1,30000'
+  // )
+  Route.get('drones/:id/recall', 'DronesController.recall')
 })
+  .middleware('auth')
+  .middleware('updateAction')
+
+/* -------------------------------------------------------------------------- */
+/*                                    Admin                                   */
+/* -------------------------------------------------------------------------- */
+Route.group(() => {
+  Route.get('/', async () => {
+    return {hello: 'admin'}
+  })
+}).prefix('/admin')
